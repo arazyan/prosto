@@ -1,3 +1,5 @@
 aiogram==2.21
 selenium
 beautifulsoup4
+aiohttp
+requests
