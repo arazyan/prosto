@@ -1,9 +1,13 @@
+from logging import error
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 import time
+
+from standartize import old_to_new
+import qr
 
 driver = webdriver.Chrome()
 meetups = {}
@@ -125,12 +129,18 @@ def extract_user(qr_link: str):
 
 
 def get_username(qr_link: str):
-  if 'confirm_user' in qr_link:
-    return extract_from_new_user(qr_link)
-  elif 'form_participation' in qr_link:
-    return extract_user(qr_link)
-  else:
+  try:
+    if 'confirm_user' in qr_link:
+      return extract_from_new_user(qr_link)
+    elif 'form_participation' in qr_link:
+      return extract_user(qr_link)
+    else:
+      return qr_link, 'Не удалось распознать qr'
+  except Exception as err:
+    # print(err)
+    # time.sleep(30)
     return qr_link, 'Не удалось распознать qr'
+
 
 
 # api.prostospb.team credentials
@@ -178,13 +188,20 @@ https://api.prostospb.team/api/form_participation.php?user_id=123788&event_id=97
 https://api.prostospb.team/api/form_participation.php?user_id=147958&event_id=9707 
 https://api.prostospb.team/api/form_participation.php?user_id=124855&event_id=9707 
 https://api.prostospb.team/confirm_user?verification_id=156357 
-https://api.prostospb.team/api/form_participation.php?user_id=156357&event_id=9707"""
+https://api.prostospb.team/api/form_participation.php?user_id=156357&event_id=9707
+xn--90azaccdibh.xn--p1ai/api/form_participation.php?user_id=128770&event_id=9706 """
 # проверить, что будет на случай, если человек зарегался и впервые с неподтвержденным профилем пришел на меро
+
+output = qr.inputs
+
 quars = [x.strip() for x in output.split('\n')]
 
 
 username_meetups = []
 for quar in quars:
+  if '.xn--' in quar:
+    quar = old_to_new(quar)
+
   username_meetups.append(get_username(quar))
 
 answer = {}
@@ -195,9 +212,10 @@ for username, meetup in username_meetups:
 
 def beauty_set_output(s: set):
   for k in s:
-    print(f'----{k}----')
+    intro = f'----{k}----'
+    outro = '-'*len(intro)
+    print(intro)
     for elem in s[k]:
       print(elem)
-    print('---------')
-
+    print(outro, end='\n\n')
 beauty_set_output(answer)

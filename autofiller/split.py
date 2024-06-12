@@ -6,7 +6,7 @@ https://api.prostospb.team/api/form_participation.php?user_id=141770&event_id=97
 https://api.prostospb.team/confirm_user?verification_id=156308 
 https://api.prostospb.team/api/form_participation.php?user_id=156308&event_id=9706 
 https://api.prostospb.team/api/form_participation.php?user_id=147904&event_id=9706 
-https://xn--90azaccdibh.xn--p1ai/api/form_participation.php?user_id=128770&event_id=9706 
+xn--90azaccdibh.xn--p1ai/api/form_participation.php?user_id=128770&event_id=9706 
 https://api.prostospb.team/api/form_participation.php?user_id=44918&event_id=9706 
 https://api.prostospb.team/api/form_participation.php?user_id=137744&event_id=9706 
 https://api.prostospb.team/api/form_participation.php?user_id=127467&event_id=11974 
