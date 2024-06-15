@@ -1,10 +1,11 @@
-from logging import error
+# from logging import error
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 import time
+start = time.time()
 
 from standartize import old_to_new
 import qr
@@ -205,6 +206,8 @@ for quar in quars:
   username_meetups.append(get_username(quar))
 
 answer = {}
+unique_answer = {}
+
 for username, meetup in username_meetups:
   if meetup not in answer:
     answer[meetup] = set() 
@@ -213,13 +216,23 @@ for username, meetup in username_meetups:
 def beauty_set_output(s: set):
   for k in s:
     if k == "Некорректные данные":
+      # s.remove(k)
       continue
     intro = f'----{k}----'
     outro = '-'*len(intro)
     print(intro)
     for elem in s[k]:
       print(elem)
+      unique_answer.add(elem)
 
-    print(f'\nВсего: {len(s[k])}')
+    print(f'\nВсегооо: {len(s[k])}')
     print(outro, end='\n\n')
+
+
+
+print(unique_answer)
+print(len(unique_answer))
 beauty_set_output(answer)
+
+print(time.time() - start)
+
