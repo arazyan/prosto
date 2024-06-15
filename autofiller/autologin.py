@@ -107,8 +107,10 @@ def extract_from_new_user(qr_link: str):
   for x in form_inputs:
     name = x.get_attribute("value")
     if isinstance(name, str) and len(name) > 1:
-      username += (' ' + name)
+      username += (' ' + name.strip())
 
+  tmp = username.strip().split() 
+  username = tmp[1] + ' ' + tmp[0]
   return username.strip(), 'Новый пользователь (подтверждение профиля)'
 
 
@@ -121,11 +123,10 @@ def extract_user(qr_link: str):
 
   text = driver.find_element("xpath", "//div[@class='alert alert-danger']").text
 
-  meetup = text.split('на мероприятие ')[-1].strip()
+  meetup = text.split('на мероприятие ')[-1].replace("\'", "").strip()
   username = text[text.find('Пользователь')+len('Пользователь '): text.find(' уже отмечен')]
 
   return username, meetup
-
 
 
 def get_username(qr_link: str):
@@ -134,12 +135,11 @@ def get_username(qr_link: str):
       return extract_from_new_user(qr_link)
     elif 'form_participation' in qr_link:
       return extract_user(qr_link)
-    else:
-      return qr_link, 'Не удалось распознать qr'
   except Exception as err:
-    # print(err)
-    # time.sleep(30)
-    return qr_link, 'Не удалось распознать qr'
+    # лучше бы записывать все в файлик
+    print(err)
+    print(qr_link)
+  return qr_link, 'Не удалось распознать qr'
 
 
 
@@ -212,10 +212,14 @@ for username, meetup in username_meetups:
 
 def beauty_set_output(s: set):
   for k in s:
+    if k == "Некорректные данные":
+      continue
     intro = f'----{k}----'
     outro = '-'*len(intro)
     print(intro)
     for elem in s[k]:
       print(elem)
+
+    print(f'\nВсего: {len(s[k])}')
     print(outro, end='\n\n')
 beauty_set_output(answer)
