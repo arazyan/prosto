@@ -98,13 +98,12 @@ def get_username(qr_link: str):
       return extract_user(qr_link)
   except Exception as err:
     # лучше бы записывать все в файлик
-    print(err)
+    # print(err)
     print(qr_link)
   return qr_link, 'Не удалось распознать qr'
 
 # бот будет выглядеть как поросенок
 # порося бот
-
 
 output = qr.inputs
 
@@ -152,12 +151,13 @@ for k in answer:
 
 beauty_res_output(answer)
 
-unique_answer_sorted = sorted(list(unique_answer))
+# unique_answer_sorted = sorted(list(unique_answer))
+unique_answer_sorted = list(unique_answer)
 print(f'\n\tСписок для вставки в таблицу\n\t{'-'*28}')
 for x in unique_answer_sorted: print(x)
 
 # дополнительная инфа
 print()
-print(len(unique_answer_sorted))
+print(f'{len(unique_answer_sorted)} записей')
 print()
-print(time.time() - start)
+print(f'{int(time.time() - start)} сек.')
