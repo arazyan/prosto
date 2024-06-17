@@ -125,7 +125,7 @@ for username, meetup in username_meetups:
     answer[meetup] = set() 
   answer[meetup].add(username)
 
-def beauty_res_output(s: set):
+def beauty_res_output(s):
   with open('detailed.txt', 'w') as file:
     for k in s:
       if k == "Некорректные данные":
@@ -161,3 +161,4 @@ print()
 print(f'{len(unique_answer_sorted)} записей')
 print()
 print(f'{int(time.time() - start)} сек.')
+

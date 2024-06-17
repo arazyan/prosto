@@ -1,5 +1,6 @@
-aiogram==2.21
+aiogram
 selenium
 beautifulsoup4
 aiohttp
 requests
+pandas
