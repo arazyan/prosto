@@ -4,13 +4,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 import time
+
+import dataframe
+
 start = time.time()
 
 from standartize import old_to_new
-import qr
+# import qr
 
 driver = webdriver.Chrome()
-meetups = {}
+# meetups = {}
 
 def auth():
   username = "kolbasovaann@gmail.com"
@@ -73,7 +76,7 @@ def extract_from_new_user(qr_link: str):
 
   tmp = username.strip().split() 
   username = tmp[1] + ' ' + tmp[0]
-  return username.strip(), 'Новый пользователь (подтверждение профиля)'
+  return [username.strip(), 'Новый пользователь (подтверждение профиля)']
 
 
 def extract_user(qr_link: str):
@@ -87,78 +90,124 @@ def extract_user(qr_link: str):
   meetup = text.split('на мероприятие ')[-1].replace("\'", "").strip()
   username = text[text.find('Пользователь')+len('Пользователь '): text.find(' уже отмечен')]
 
-  return username, meetup
+  return [username, meetup]
 
 
 def get_username(qr_link: str):
+  """Получить имя. Если не удается распарсить, возвращает неудачу."""
   try:
     if 'confirm_user' in qr_link:
       return extract_from_new_user(qr_link)
     elif 'form_participation' in qr_link:
       return extract_user(qr_link)
-  except Exception as err:
+  except:
     # лучше бы записывать все в файлик
     # print(err)
     print(qr_link)
-  return qr_link, 'Не удалось распознать qr'
-
-# бот будет выглядеть как поросенок
-# порося бот
-
-output = qr.inputs
-
-quars = [x.strip() for x in output.split('\n')]
+  return [qr_link, 'Не удалось распознать qr']
 
 
-username_meetups = []
-for quar in quars:
-  if '.xn--' in quar:
-    quar = old_to_new(quar)
+def quars_regularization(quar_time_pairs):
+  """Стандартизирует куар-коды в единый вид."""
+  for i in range(len(quar_time_pairs)):
+    if '.xn--' in quar_time_pairs[i][0]:
+      quar_time_pairs[i][0] = old_to_new(quar_time_pairs[i][0])
 
-  username_meetups.append(get_username(quar))
 
+def fill_structrues(quar_time_pairs):
+  """Заполняет объекты данными."""
+  i = 0
+  for quar, time in quar_time_pairs:
+    GOFORWARD = True
+    name, meetup = get_username(quar)
+    if meetup.startswith('Не удалось'):
+      brokens.append(i)
+      GOFORWARD = False
+
+    # записываем отдельно меру и имя
+    if meetup not in meetup_names:
+      meetup_names[meetup] = set()
+    meetup_names[meetup].add(name)
+
+    if 'с ID=' in name:
+      try:
+        answer.pop(name)
+      except:
+        pass   # записываем человека и во сколько он пришел
+      continue
+
+    if GOFORWARD:
+      if name not in answer:
+        answer[name] = time
+        # for debug:
+        # answer[name] = [time, quar]
+      else:
+        # print(answer[name])
+        # print(time, quar)
+        repeats.append(i)
+
+    i += 1
+
+
+def save_table(filename: str):
+  with open(filename, 'w') as file:
+    for name in answer:
+      file.write(f'{name}\n')
+
+    file.write('\n')
+
+    for name in answer:
+      file.write(f'{answer[name]}\n')
+
+
+def save_details(filename: str):
+  with open(filename, 'w') as file:
+    for meetup in meetup_names:
+      file.write('-'*len(meetup) + '\n')
+      file.write(f'{meetup}'     + '\n')
+      file.write('-'*len(meetup) + '\n')
+      
+      for name in meetup_names[meetup]:
+        file.write(name + '\n')
+
+      file.write('\n')
+# ------------------------------------------------------------------------------------------------------
+# Конец функционального блока
+# ------------------------------------------------------------------------------------------------------
+
+quar_time = dataframe.qr_time_sorted
+# quar_time = quar_time[30:60]
+
+# стандартизируем куары
+quars_regularization(quar_time_pairs=quar_time)
+
+meetup_names = {}
 answer = {}
-unique_answer = set()
+repeats = []
+brokens = []
 
-for username, meetup in username_meetups:
-  if meetup not in answer:
-    answer[meetup] = set() 
-  answer[meetup].add(username)
+fill_structrues(quar_time_pairs=quar_time)
 
-def beauty_res_output(s):
-  with open('detailed.txt', 'w') as file:
-    for k in s:
-      if k == "Некорректные данные":
-        s.remove(k)
-        continue
-      intro = f'----{k}----'
-      outro = '-'*len(intro)
+# print(meetup_names)
+# print()
+# print(answer)
 
-      file.write(f'{intro}\n')
-
-      for person in s[k]: file.write(f'{person}\n') 
-
-      file.write(f'\nВсего: {len(s[k])}\n')
-      file.write(f'{outro}\n\n')
+save_table('выгрузка.txt')
+save_details('детали.txt')
 
 
 
-for k in answer:
-  if k == 'Не удалось распознать qr':
-    continue
-  for v in answer[k]:
-    unique_answer.add(v)
+# print(len(quar_time))
+# print(len(answer))
+# print(answer)
+# for idx, pair in enumerate(quar_time):
+  # print(idx, pair)
 
-beauty_res_output(answer)
+# print(brokens)
+# посмотрим на не куары
+# for broken_idx in brokens:
+  # print(quar_time[broken_idx])
+# print(repeats)
 
-# unique_answer_sorted = sorted(list(unique_answer))
-unique_answer_sorted = list(unique_answer)
-print(f'\n\tСписок для вставки в таблицу\n\t{'-'*28}')
-for x in unique_answer_sorted: print(x)
 
-# дополнительная инфа
-print()
-print(f'{len(unique_answer_sorted)} записей')
-print()
-print(f'{int(time.time() - start)} сек.')
 

@@ -1,0 +1,44 @@
+----Не удалось распознать qr----
+https://api.prostospb.team/api/form_participation.php?user_id=153643&event_id=9711
+https://api.prostospb.team/confirm_user?verification_id=115684
+https://api.prostospb.team/api/form_participation.php?user_id=115685&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=135444&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=115684&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=150448&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=34475&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=19202&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=21991&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=125271&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=138036&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=87141&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=138037&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=120964&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=144819&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=9738&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=155622&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=128296&event_id=9711
+https://api.prostospb.team/api/form_participation.php?user_id=134227&event_id=9711
+CODECONTENT
+
+
+Всего: 21
+--------------------------------
+
+----ПРОСТО на Карповке (16.06.2024)----
+Шахд Мухаммед
+Тютюкова Ирина
+Куркан Евгения
+Харьковской Роман
+Юнусова Лия
+Коваль Егор
+Дау Незар
+
+Всего: 7
+---------------------------------------
+
+----Новый пользователь (подтверждение профиля)----
+Тютюкова Ирина
+
+Всего: 1
+--------------------------------------------------
+
