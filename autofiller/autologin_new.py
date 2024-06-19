@@ -136,7 +136,9 @@ def fill_structrues(quar_time_pairs):
         pass   # записываем человека и во сколько он пришел
       continue
 
-    if GOFORWARD:
+    # сохраняем только людей, которые пришли в коворкинг на карповку
+    # потому как в табличке нужно записывать по факту пришедших в коворк
+    if GOFORWARD and 'ПРОСТО на Карповке'.lower() not in meetup.lower():
       if name not in answer:
         answer[name] = time
         # for debug:
@@ -150,6 +152,7 @@ def fill_structrues(quar_time_pairs):
 
 
 def save_table(filename: str):
+  """Выгрузка"""
   with open(filename, 'w') as file:
     for name in answer:
       file.write(f'{name}\n')
@@ -161,6 +164,7 @@ def save_table(filename: str):
 
 
 def save_details(filename: str):
+  """Детали"""
   with open(filename, 'w') as file:
     for meetup in meetup_names:
       file.write('-'*len(meetup) + '\n')
@@ -187,6 +191,8 @@ repeats = []
 brokens = []
 
 fill_structrues(quar_time_pairs=quar_time)
+# print(answer)
+# time.sleep(5)
 
 # print(meetup_names)
 # print()
