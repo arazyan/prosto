@@ -19,16 +19,19 @@ def beaty_times(datetimezones: list[str]) -> list[str]:
   if '+' in datetimezones[0]: times = [datetime.fromisoformat(elem.strip()).strftime("%H:%M") for elem in datetimezones]
   else:
     times = [datetime.strptime(elem.strip(), '%H:%M:%S').strftime("%H:%M") for elem in datetimezones]
+
+  print(f'times length: {len(times)}')
   return times
 
 
 # allqrs   = qrs.qrs1.split('\n')
 # allqrs.extend(qrs.qrs2.split('\n'))
-allqrs = qrs.qr3.split('\n')
+# allqrs = qrs.qr3.split('\n')
+allqrs = qrs.qr.split('\n')
 
 # alltimes = (beaty_times(times.times1.split('\n')))
 # alltimes.extend(beaty_times(times.times2.split('\n')))
-alltimes = beaty_times(times.time3.split('\n'))
+alltimes = beaty_times(times.times.split('\n'))
 
 # print(len(allqrs), len(alltimes))
 # print(allqrs)
