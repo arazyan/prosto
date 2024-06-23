@@ -31,7 +31,7 @@ allqrs = qrs.qr.split('\n')
 
 # alltimes = (beaty_times(times.times1.split('\n')))
 # alltimes.extend(beaty_times(times.times2.split('\n')))
-alltimes = beaty_times(times.times.split('\n'))
+alltimes = beaty_times(times.time.split('\n'))
 
 # print(len(allqrs), len(alltimes))
 # print(allqrs)
