@@ -1,0 +1,24 @@
+2024/06/27-14:11:20.183 316f8 Reusing MANIFEST /home/sad/git/prosto/whatsapp_sender/profile/Profile 1/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/06/27-14:11:20.183 316f8 Recovering log #116
+2024/06/27-14:11:20.187 316f8 Reusing old log /home/sad/git/prosto/whatsapp_sender/profile/Profile 1/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000116.log 
+2024/06/27-14:11:20.415 316f8 Level-0 table #121: started
+2024/06/27-14:11:20.421 316f8 Level-0 table #121: 177345 bytes OK
+2024/06/27-14:11:20.425 316f8 Delete type=0 #116
+2024/06/27-14:11:20.425 316f8 Manual compaction at level-0 from '\x00-\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00.\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/06/27-14:11:20.426 316f8 Level-0 table #123: started
+2024/06/27-14:11:20.428 316f8 Level-0 table #123: 380 bytes OK
+2024/06/27-14:11:20.433 316f8 Delete type=0 #120
+2024/06/27-14:11:20.433 316f8 Manual compaction at level-0 from '\x00.\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00/\x00\x00\x00' @ 0 : 0; will stop at '\x00.\x00\x00\x05' @ 290206 : 0
+2024/06/27-14:11:20.433 316f8 Compacting 1@0 + 1@1 files
+2024/06/27-14:11:20.438 316f8 Generated table #124@0: 3483 keys, 95200 bytes
+2024/06/27-14:11:20.438 316f8 Compacted 1@0 + 1@1 files => 95200 bytes
+2024/06/27-14:11:20.442 316f8 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/06/27-14:11:20.442 316f8 Delete type=2 #123
+2024/06/27-14:11:20.442 316f8 Manual compaction at level-0 from '\x00.\x00\x00\x05' @ 290206 : 0 .. '\x00/\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/06/27-14:11:21.386 316f9 Compacting 1@1 + 1@2 files
+2024/06/27-14:11:21.417 316f9 Generated table #125@1: 44805 keys, 1973899 bytes
+2024/06/27-14:11:21.417 316f9 Compacted 1@1 + 1@2 files => 1973899 bytes
+2024/06/27-14:11:21.420 316f9 compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/06/27-14:11:21.420 316f9 Delete type=2 #124
+2024/06/27-14:11:21.421 316f9 Delete type=2 #118
+2024/06/27-14:11:21.421 316f9 Delete type=2 #121
